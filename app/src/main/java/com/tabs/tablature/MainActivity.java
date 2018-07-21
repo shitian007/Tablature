@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,12 +22,15 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                    showSystemUI();
                     setFragment(homeFragment);
                     return true;
                 case R.id.navigation_dashboard:
+                    hideSystemUI();
                     setFragment(createTabFragment);
                     return true;
                 case R.id.navigation_notifications:
+                    showSystemUI();
                     setFragment(profileFragment);
                     return true;
             }
@@ -43,6 +47,22 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         setFragment(homeFragment);
+    }
+
+    // Enable stick immersive display on full screen
+    private void hideSystemUI() {
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN);
+    }
+
+    private void showSystemUI() {
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility((
+                View.SYSTEM_UI_FLAG_FULLSCREEN
+                ));
     }
 
     public void setFragment(Fragment fragment) {
