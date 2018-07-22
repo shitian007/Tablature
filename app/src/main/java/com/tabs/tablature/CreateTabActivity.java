@@ -11,6 +11,7 @@ public class CreateTabActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_tab);
 
+        // TODO: Change orientation to landscape
         hideSystemUI();
     }
 

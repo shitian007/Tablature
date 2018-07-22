@@ -34,6 +34,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActivity().setTitle("Tablature");
 
         // TODO: Setup service to load tabs
         featuredTabs = new ArrayList<>();

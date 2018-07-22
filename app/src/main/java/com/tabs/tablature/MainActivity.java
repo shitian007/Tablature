@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     private HomeFragment homeFragment = new HomeFragment();
     private ProfileFragment profileFragment = new ProfileFragment();
 
+    private BottomNavigationView navigation;
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -22,15 +24,13 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    setTitle("Tablature");
                     setFragment(homeFragment);
                     return true;
-                case R.id.navigation_dashboard:
+                case R.id.navigation_create_tab:
                     Intent createTabIntent = new Intent(MainActivity.this, CreateTabActivity.class);
                     startActivity(createTabIntent);
                     return true;
-                case R.id.navigation_notifications:
-                    setTitle("User Profile");
+                case R.id.navigation_profile:
                     setFragment(profileFragment);
                     return true;
             }
@@ -43,12 +43,37 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView navigation = findViewById(R.id.navigation);
+        navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         showSystemUI();
+        navigation.setSelectedItemId(R.id.navigation_home);
         setFragment(homeFragment);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        backNavigationHelper();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        backNavigationHelper();
+    }
+
+    private void backNavigationHelper() {
+        Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if(f instanceof HomeFragment) {
+            setTitle("Home");
+            navigation.setSelectedItemId(R.id.navigation_home);
+        } else if (f instanceof ProfileFragment) {
+            setTitle("User Profile");
+            navigation.setSelectedItemId(R.id.navigation_profile);
+        }
+    }
+
 
     private void showSystemUI() {
         View decorView = getWindow().getDecorView();
