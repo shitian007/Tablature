@@ -1,5 +1,6 @@
 package com.tabs.tablature;
 
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,7 @@ public class CreateTabActivity extends AppCompatActivity {
 
         // TODO: Change orientation to landscape
         hideSystemUI();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
     }
 
     // Enable stick immersive display on full screen
