@@ -7,16 +7,16 @@ public class MainThread extends Thread {
 
     private SurfaceHolder surfaceHolder;
 
-    private GameView gameView;
+    private CreateTabView createTabView;
 
     private boolean running;
 
     public static Canvas canvas;
 
-    public MainThread(SurfaceHolder surfaceHolder, GameView gameView) {
+    public MainThread(SurfaceHolder surfaceHolder, CreateTabView createTabView) {
         super();
         this.surfaceHolder = surfaceHolder;
-        this.gameView = gameView;
+        this.createTabView = createTabView;
     }
 
     @Override
@@ -25,8 +25,8 @@ public class MainThread extends Thread {
             canvas = null;
             canvas = this.surfaceHolder.lockCanvas();
             synchronized (surfaceHolder) {
-                this.gameView.update();
-                this.gameView.draw(canvas);
+                this.createTabView.update();
+                this.createTabView.draw(canvas);
             }
             if (canvas != null) surfaceHolder.unlockCanvasAndPost(canvas);
         }

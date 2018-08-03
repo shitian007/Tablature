@@ -20,18 +20,21 @@ public class TablatureFileIO implements FileIO {
     String externalStoragePath;
 
     public TablatureFileIO(Context context) {
-        this.context =context;
-        this.assets =context.getAssets();
+        this.context = context;
+        this.assets = context.getAssets();
         this.externalStoragePath = Environment.getExternalStorageDirectory()
                 .getAbsolutePath() + File.separator;
     }
+
     public InputStream readAsset(String fileName) throws IOException {
         return assets.open(fileName);
     }
+
     public InputStream readFile(String fileName) throws IOException {
-        return new FileInputStream(externalStoragePath+fileName);
+        return new FileInputStream(externalStoragePath + fileName);
     }
+
     public OutputStream writeFile(String fileName) throws IOException {
-        return new FileOutputStream(externalStoragePath+fileName);
+        return new FileOutputStream(externalStoragePath + fileName);
     }
 }
