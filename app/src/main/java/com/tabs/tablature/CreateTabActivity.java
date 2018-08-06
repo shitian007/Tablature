@@ -10,13 +10,14 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ScrollView;
 
+import com.tabs.tablature.framework.implementation.CreateTabScrollView;
 import com.tabs.tablature.framework.implementation.CreateTabView;
 import com.tabs.tablature.framework.implementation.TablatureAudio;
 import com.tabs.tablature.framework.implementation.TablatureFileIO;
 
 public class CreateTabActivity extends Activity {
 
-    ScrollView scrollView;
+    CreateTabScrollView scrollView;
     CreateTabView createTabView;
 
     TablatureFileIO tablatureFileIO;
@@ -41,11 +42,9 @@ public class CreateTabActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        createTabView = new CreateTabView(this);
-//        createTabView.setLayoutParams(new WindowManager.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
-//                WindowManager.LayoutParams.MATCH_PARENT));
 
-        scrollView = new ScrollView(this);
+        scrollView = new CreateTabScrollView(this);
+        createTabView = new CreateTabView(this, scrollView);
         scrollView.addView(createTabView);
         setContentView(scrollView);
     }

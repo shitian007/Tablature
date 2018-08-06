@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -13,10 +15,12 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
 
     MainThread mGameThread;
     Note note;
+    CreateTabScrollView parentScrollView;
 
-    public CreateTabView(Context context) {
+    public CreateTabView(Context context, CreateTabScrollView parentScrollView) {
         super(context);
         getHolder().addCallback(this);
+        this.parentScrollView = parentScrollView;
 
         mGameThread = new MainThread(getHolder(), this);
         setFocusable(true);
@@ -59,6 +63,26 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
     }
 
     @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        float x = event.getX();
+        float y = event.getY();
+
+        int action = event.getAction();
+        switch(action){
+            case MotionEvent.ACTION_DOWN:
+                break;
+            case MotionEvent.ACTION_MOVE:
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+            default:
+                break;
+        }
+        return true; //processed
+    }
+
+    @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
         canvas.drawColor(Color.WHITE);
@@ -66,19 +90,15 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
             note.x = 0;
             note.y = 0;
             note.draw(canvas);
-
             note.x = 0;
             note.y = 300;
             note.draw(canvas);
-
             note.x = 0;
             note.y = 600;
             note.draw(canvas);
-
             note.x = 0;
             note.y = 900;
             note.draw(canvas);
-
             note.x = 0;
             note.y = 1200;
             note.draw(canvas);
