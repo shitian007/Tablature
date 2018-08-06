@@ -8,12 +8,16 @@ import android.os.PowerManager;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ScrollView;
 
 import com.tabs.tablature.framework.implementation.CreateTabView;
 import com.tabs.tablature.framework.implementation.TablatureAudio;
 import com.tabs.tablature.framework.implementation.TablatureFileIO;
 
 public class CreateTabActivity extends Activity {
+
+    ScrollView scrollView;
+    CreateTabView createTabView;
 
     TablatureFileIO tablatureFileIO;
     TablatureAudio tablatureAudio;
@@ -37,7 +41,13 @@ public class CreateTabActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        setContentView(new CreateTabView(this));
+        createTabView = new CreateTabView(this);
+//        createTabView.setLayoutParams(new WindowManager.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT,
+//                WindowManager.LayoutParams.MATCH_PARENT));
+
+        scrollView = new ScrollView(this);
+        scrollView.addView(createTabView);
+        setContentView(scrollView);
     }
 
     // Enable stick immersive display on full screen

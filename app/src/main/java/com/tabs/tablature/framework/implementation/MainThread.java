@@ -25,7 +25,6 @@ public class MainThread extends Thread {
             canvas = null;
             canvas = this.surfaceHolder.lockCanvas();
             synchronized (surfaceHolder) {
-                this.createTabView.update();
                 this.createTabView.draw(canvas);
             }
             if (canvas != null) surfaceHolder.unlockCanvasAndPost(canvas);

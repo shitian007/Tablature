@@ -22,6 +22,16 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
         setFocusable(true);
     }
 
+    /**
+     * Height of view should change dynamically according to number of tab lines */
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int width = MeasureSpec.getSize(widthMeasureSpec);
+        int height = Math.max(MeasureSpec.getSize(heightMeasureSpec), 2000);
+        setMeasuredDimension(width, height);
+    }
+
+
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
         note = new Note(BitmapFactory.decodeResource(getResources(), R.drawable.crochet), 0, 0);
@@ -46,9 +56,6 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
                 e.printStackTrace();
             }
         }
-    }
-
-    public void update() {
     }
 
     @Override
