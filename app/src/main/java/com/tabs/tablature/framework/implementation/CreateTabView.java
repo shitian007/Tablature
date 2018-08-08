@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -15,12 +16,15 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
 
     MainThread mGameThread;
     Note note;
-    CreateTabScrollView parentScrollView;
+    final CreateTabScrollView parentScrollView;
+    final GestureDetector gestureListener;
 
     public CreateTabView(Context context, CreateTabScrollView parentScrollView) {
         super(context);
         getHolder().addCallback(this);
+
         this.parentScrollView = parentScrollView;
+        this.gestureListener = new GestureDetector(context, new TabGestureListener());
 
         mGameThread = new MainThread(getHolder(), this);
         setFocusable(true);
@@ -65,21 +69,23 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        float x = event.getX();
-        float y = event.getY();
+        gestureListener.onTouchEvent(event);
 
-        int action = event.getAction();
-        switch(action){
+        float xCoord = event.getX();
+        float yCoord = event.getY();
+
+        switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                Log.d("CreateTabView onTouch", "ACTION DOWN");
                 break;
             case MotionEvent.ACTION_MOVE:
+                Log.d("CreateTabView onTouch", "ACTION MOVE");
                 break;
             case MotionEvent.ACTION_UP:
-                break;
-            default:
+                Log.d("CreateTabView onTouch", "ACTION UP");
                 break;
         }
-        return true; //processed
+        return true;
     }
 
     @Override
