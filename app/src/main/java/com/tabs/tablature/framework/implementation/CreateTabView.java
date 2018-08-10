@@ -11,11 +11,12 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.tabs.tablature.R;
+import com.tabs.tablature.framework.base.NoteBase;
 
 public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback {
 
     MainThread mGameThread;
-    Note note;
+    NoteBase noteBase;
     final CreateTabScrollView parentScrollView;
     final GestureDetector gestureListener;
 
@@ -42,7 +43,7 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
-        note = new Note(BitmapFactory.decodeResource(getResources(), R.drawable.crochet), 0, 0);
+        noteBase = new NoteBase(BitmapFactory.decodeResource(getResources(), R.drawable.crochet), 0, 0);
         mGameThread.setRunning(true);
         mGameThread.start();
     }
@@ -93,21 +94,21 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
         super.draw(canvas);
         canvas.drawColor(Color.WHITE);
         if (canvas != null) {
-            note.x = 0;
-            note.y = 0;
-            note.draw(canvas);
-            note.x = 0;
-            note.y = 300;
-            note.draw(canvas);
-            note.x = 0;
-            note.y = 600;
-            note.draw(canvas);
-            note.x = 0;
-            note.y = 900;
-            note.draw(canvas);
-            note.x = 0;
-            note.y = 1200;
-            note.draw(canvas);
+            noteBase.x = 0;
+            noteBase.y = 0;
+            noteBase.draw(canvas);
+            noteBase.x = 0;
+            noteBase.y = 300;
+            noteBase.draw(canvas);
+            noteBase.x = 0;
+            noteBase.y = 600;
+            noteBase.draw(canvas);
+            noteBase.x = 0;
+            noteBase.y = 900;
+            noteBase.draw(canvas);
+            noteBase.x = 0;
+            noteBase.y = 1200;
+            noteBase.draw(canvas);
         }
     }
 
