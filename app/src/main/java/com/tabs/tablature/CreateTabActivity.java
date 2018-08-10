@@ -20,9 +20,6 @@ public class CreateTabActivity extends Activity {
     CreateTabScrollView scrollView;
     CreateTabView createTabView;
 
-    TablatureFileIO tablatureFileIO;
-    TablatureAudio tablatureAudio;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,16 +32,15 @@ public class CreateTabActivity extends Activity {
         wakeLock.acquire();
         hideSystemUI();
 
-        // File and Audio assets
-        tablatureFileIO = new TablatureFileIO(this);
-        tablatureAudio = new TablatureAudio(this);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-
         scrollView = new CreateTabScrollView(this);
         createTabView = new CreateTabView(this, scrollView);
+
+        createTabView.setTablatureAudio(new TablatureAudio(this));
+        createTabView.setTablatureFileIO(new TablatureFileIO(this));
         scrollView.addView(createTabView);
         setContentView(scrollView);
     }

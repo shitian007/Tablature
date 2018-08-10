@@ -20,6 +20,17 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
     final CreateTabScrollView parentScrollView;
     final GestureDetector gestureListener;
 
+    public void setTablatureFileIO(TablatureFileIO tablatureFileIO) {
+        this.tablatureFileIO = tablatureFileIO;
+    }
+
+    public void setTablatureAudio(TablatureAudio tablatureAudio) {
+        this.tablatureAudio = tablatureAudio;
+    }
+
+    TablatureFileIO tablatureFileIO;
+    TablatureAudio tablatureAudio;
+
     public CreateTabView(Context context, CreateTabScrollView parentScrollView) {
         super(context);
         getHolder().addCallback(this);
@@ -32,7 +43,8 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
     }
 
     /**
-     * Height of view should change dynamically according to number of tab lines */
+     * Height of view should change dynamically according to number of tab lines
+     */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width = MeasureSpec.getSize(widthMeasureSpec);
