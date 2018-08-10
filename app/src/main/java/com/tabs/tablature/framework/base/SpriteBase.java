@@ -7,13 +7,18 @@ public class SpriteBase {
 
     private Bitmap image;
 
-    public int x;
-    public int y;
+    public float x;
+    public float y;
 
-    public SpriteBase(Bitmap bitmap, int initialX, int initialY) {
+    public float imageWidth;
+    public float imageHeight;
+
+    public SpriteBase(Bitmap bitmap, float initialX, float initialY) {
         this.image = bitmap;
         this.x = initialX;
         this.y = initialY;
+        this.imageWidth = bitmap.getWidth();
+        this.imageHeight = bitmap.getHeight();
     }
 
     public int getWidth() {
