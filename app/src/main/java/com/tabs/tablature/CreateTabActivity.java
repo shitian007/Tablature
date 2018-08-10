@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.view.GestureDetector;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -13,6 +14,7 @@ import android.widget.ScrollView;
 import com.tabs.tablature.framework.implementation.CreateTabManager;
 import com.tabs.tablature.framework.implementation.CreateTabScrollView;
 import com.tabs.tablature.framework.implementation.CreateTabView;
+import com.tabs.tablature.framework.implementation.TabGestureListener;
 import com.tabs.tablature.framework.implementation.TablatureAudio;
 import com.tabs.tablature.framework.implementation.TablatureFileIO;
 
@@ -49,6 +51,7 @@ public class CreateTabActivity extends Activity {
         createTabManager = new CreateTabManager();
         createTabManager.instantiateObjects(tablatureFileIO);
         createTabView.setCreateTabManager(createTabManager);
+        createTabView.setGestureDetector(new GestureDetector(this, new TabGestureListener(createTabManager)));
 
         scrollView.addView(createTabView);
         setContentView(scrollView);

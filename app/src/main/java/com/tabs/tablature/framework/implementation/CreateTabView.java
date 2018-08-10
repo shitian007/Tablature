@@ -16,7 +16,12 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
 
     MainThread mGameThread;
     final CreateTabScrollView parentScrollView;
-    final GestureDetector gestureListener;
+
+    public void setGestureDetector(GestureDetector gestureDetector) {
+        this.gestureDetector = gestureDetector;
+    }
+
+    GestureDetector gestureDetector;
     CreateTabManager createTabManager;
 
     public CreateTabView(Context context, CreateTabScrollView parentScrollView) {
@@ -24,7 +29,6 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
         getHolder().addCallback(this);
 
         this.parentScrollView = parentScrollView;
-        this.gestureListener = new GestureDetector(context, new TabGestureListener());
 
         mGameThread = new MainThread(getHolder(), this);
         setFocusable(true);
@@ -32,6 +36,7 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
 
     /**
      * Height of view should change dynamically according to number of tab lines
+     * taking the maximum of either number of staves or screen height
      */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -69,7 +74,7 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        gestureListener.onTouchEvent(event);
+        gestureDetector.onTouchEvent(event);
 
         float xCoord = event.getX();
         float yCoord = event.getY();
