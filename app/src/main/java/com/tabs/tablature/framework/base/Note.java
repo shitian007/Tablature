@@ -5,9 +5,9 @@ import android.graphics.Canvas;
 
 import com.tabs.tablature.framework.base.SpriteBase;
 
-public class NoteBase extends SpriteBase {
+public class Note extends SpriteBase {
 
-    public NoteBase(Bitmap bitmap, float initialX, float initialY) {
+    public Note(Bitmap bitmap, float initialX, float initialY) {
         super(bitmap, initialX, initialY);
     }
 
