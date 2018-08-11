@@ -1,7 +1,6 @@
 package com.tabs.tablature.framework.implementation;
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.util.Log;
@@ -10,26 +9,15 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import com.tabs.tablature.R;
 import com.tabs.tablature.framework.base.NoteBase;
+
 
 public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback {
 
     MainThread mGameThread;
-    NoteBase noteBase;
     final CreateTabScrollView parentScrollView;
     final GestureDetector gestureListener;
-
-    public void setTablatureFileIO(TablatureFileIO tablatureFileIO) {
-        this.tablatureFileIO = tablatureFileIO;
-    }
-
-    public void setTablatureAudio(TablatureAudio tablatureAudio) {
-        this.tablatureAudio = tablatureAudio;
-    }
-
-    TablatureFileIO tablatureFileIO;
-    TablatureAudio tablatureAudio;
+    CreateTabManager createTabManager;
 
     public CreateTabView(Context context, CreateTabScrollView parentScrollView) {
         super(context);
@@ -55,7 +43,6 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
-        noteBase = new NoteBase(BitmapFactory.decodeResource(getResources(), R.drawable.crochet), 0, 0);
         mGameThread.setRunning(true);
         mGameThread.start();
     }
@@ -89,7 +76,7 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                Log.d("CreateTabView onTouch", "ACTION DOWN");
+                Log.d("CreateTabView onTouch", String.format("ACTION DOWN on coordinates: %f, %f", xCoord, yCoord));
                 break;
             case MotionEvent.ACTION_MOVE:
                 Log.d("CreateTabView onTouch", "ACTION MOVE");
@@ -105,23 +92,12 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
     public void draw(Canvas canvas) {
         super.draw(canvas);
         canvas.drawColor(Color.WHITE);
-        if (canvas != null) {
-            noteBase.x = 0;
-            noteBase.y = 0;
-            noteBase.draw(canvas);
-            noteBase.x = 0;
-            noteBase.y = 300;
-            noteBase.draw(canvas);
-            noteBase.x = 0;
-            noteBase.y = 600;
-            noteBase.draw(canvas);
-            noteBase.x = 0;
-            noteBase.y = 900;
-            noteBase.draw(canvas);
-            noteBase.x = 0;
-            noteBase.y = 1200;
-            noteBase.draw(canvas);
+        for (NoteBase note : createTabManager.getNotes()) {
+            canvas.drawBitmap(note.getImage(), note.x, note.y, null);
         }
     }
 
+    public void setCreateTabManager(CreateTabManager createTabManager) {
+        this.createTabManager = createTabManager;
+    }
 }

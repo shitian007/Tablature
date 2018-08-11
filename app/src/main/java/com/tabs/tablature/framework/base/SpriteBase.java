@@ -24,6 +24,10 @@ public class SpriteBase {
         return this.image.getHeight();
     }
 
+    public Bitmap getImage() {
+        return this.image;
+    }
+
     public void draw(Canvas canvas) {
         canvas.drawBitmap(image, x, y, null);
     }

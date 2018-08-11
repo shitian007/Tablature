@@ -10,6 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ScrollView;
 
+import com.tabs.tablature.framework.implementation.CreateTabManager;
 import com.tabs.tablature.framework.implementation.CreateTabScrollView;
 import com.tabs.tablature.framework.implementation.CreateTabView;
 import com.tabs.tablature.framework.implementation.TablatureAudio;
@@ -17,8 +18,12 @@ import com.tabs.tablature.framework.implementation.TablatureFileIO;
 
 public class CreateTabActivity extends Activity {
 
+    TablatureFileIO tablatureFileIO;
+    TablatureAudio tablatureAudio;
+
     CreateTabScrollView scrollView;
     CreateTabView createTabView;
+    CreateTabManager createTabManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +41,15 @@ public class CreateTabActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
+        tablatureFileIO = new TablatureFileIO(this);
+        tablatureAudio = new TablatureAudio(this);
         scrollView = new CreateTabScrollView(this);
         createTabView = new CreateTabView(this, scrollView);
 
-        createTabView.setTablatureAudio(new TablatureAudio(this));
-        createTabView.setTablatureFileIO(new TablatureFileIO(this));
+        createTabManager = new CreateTabManager();
+        createTabManager.instantiateObjects(tablatureFileIO);
+        createTabView.setCreateTabManager(createTabManager);
+
         scrollView.addView(createTabView);
         setContentView(scrollView);
     }
