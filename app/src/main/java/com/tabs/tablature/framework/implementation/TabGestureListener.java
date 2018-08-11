@@ -4,7 +4,7 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
-import com.tabs.tablature.framework.base.NoteBase;
+import com.tabs.tablature.framework.base.Note;
 
 public class TabGestureListener extends GestureDetector.SimpleOnGestureListener {
 
@@ -21,7 +21,7 @@ public class TabGestureListener extends GestureDetector.SimpleOnGestureListener 
         float xCoord = e.getX();
         float yCoord = e.getY();
 
-        for (NoteBase note : createTabManager.getNotes()) {
+        for (Note note : createTabManager.getNotes()) {
             if (note.withinTouchBox(xCoord, yCoord)) {
                 Log.d("Note touched", "Positive");
             }

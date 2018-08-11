@@ -9,7 +9,8 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import com.tabs.tablature.framework.base.NoteBase;
+import com.tabs.tablature.framework.base.Note;
+import com.tabs.tablature.framework.base.Stave;
 
 
 public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback {
@@ -20,8 +21,11 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
     public void setGestureDetector(GestureDetector gestureDetector) {
         this.gestureDetector = gestureDetector;
     }
-
     GestureDetector gestureDetector;
+
+    public void setCreateTabManager(CreateTabManager createTabManager) {
+        this.createTabManager = createTabManager;
+    }
     CreateTabManager createTabManager;
 
     public CreateTabView(Context context, CreateTabScrollView parentScrollView) {
@@ -95,14 +99,16 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void draw(Canvas canvas) {
-        super.draw(canvas);
-        canvas.drawColor(Color.WHITE);
-        for (NoteBase note : createTabManager.getNotes()) {
-            canvas.drawBitmap(note.getImage(), note.x, note.y, null);
-        }
-    }
+        if (canvas != null) {
+            super.draw(canvas);
+            canvas.drawColor(Color.WHITE);
+            for (Stave stave : createTabManager.getStaves()) {
+                canvas.drawBitmap(stave.getImage(), stave.x, stave.y, null);
+            }
 
-    public void setCreateTabManager(CreateTabManager createTabManager) {
-        this.createTabManager = createTabManager;
+            for (Note note : createTabManager.getNotes()) {
+                canvas.drawBitmap(note.getImage(), note.x, note.y, null);
+            }
+        }
     }
 }
