@@ -1,10 +1,8 @@
-package com.tabs.tablature.framework.implementation;
+package com.tabs.tablature.framework.InputOutput;
 
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.os.Environment;
-
-import com.tabs.tablature.framework.interfaces.FileIO;
 
 import java.io.File;
 import java.io.FileInputStream;

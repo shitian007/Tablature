@@ -1,9 +1,7 @@
-package com.tabs.tablature.framework.implementation;
+package com.tabs.tablature.framework.InputOutput;
 
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
-
-import com.tabs.tablature.framework.interfaces.Music;
 
 import java.io.IOException;
 

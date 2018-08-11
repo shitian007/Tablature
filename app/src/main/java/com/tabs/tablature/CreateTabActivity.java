@@ -9,14 +9,13 @@ import android.view.GestureDetector;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ScrollView;
 
 import com.tabs.tablature.framework.implementation.CreateTabManager;
 import com.tabs.tablature.framework.implementation.CreateTabScrollView;
 import com.tabs.tablature.framework.implementation.CreateTabView;
 import com.tabs.tablature.framework.implementation.TabGestureListener;
-import com.tabs.tablature.framework.implementation.TablatureAudio;
-import com.tabs.tablature.framework.implementation.TablatureFileIO;
+import com.tabs.tablature.framework.InputOutput.TablatureAudio;
+import com.tabs.tablature.framework.InputOutput.TablatureFileIO;
 
 public class CreateTabActivity extends Activity {
 

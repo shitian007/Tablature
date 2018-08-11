@@ -3,6 +3,7 @@ package com.tabs.tablature.framework.implementation;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.tabs.tablature.framework.InputOutput.TablatureFileIO;
 import com.tabs.tablature.framework.base.NoteBase;
 
 import java.util.ArrayList;

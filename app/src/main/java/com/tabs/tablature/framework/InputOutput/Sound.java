@@ -1,4 +1,4 @@
-package com.tabs.tablature.framework.interfaces;
+package com.tabs.tablature.framework.InputOutput;
 
 public interface Sound {
     public void play(float volume);

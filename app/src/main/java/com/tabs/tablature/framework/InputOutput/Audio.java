@@ -1,4 +1,4 @@
-package com.tabs.tablature.framework.interfaces;
+package com.tabs.tablature.framework.InputOutput;
 
 public interface Audio {
     public Music newMusic(String filename);

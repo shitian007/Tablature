@@ -1,14 +1,10 @@
-package com.tabs.tablature.framework.implementation;
+package com.tabs.tablature.framework.InputOutput;
 
 import android.app.Activity;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.media.AudioManager;
 import android.media.SoundPool;
-
-import com.tabs.tablature.framework.interfaces.Audio;
-import com.tabs.tablature.framework.interfaces.Music;
-import com.tabs.tablature.framework.interfaces.Sound;
 
 import java.io.IOException;
 

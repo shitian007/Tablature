@@ -1,8 +1,6 @@
-package com.tabs.tablature.framework.implementation;
+package com.tabs.tablature.framework.InputOutput;
 
 import android.media.SoundPool;
-
-import com.tabs.tablature.framework.interfaces.Sound;
 
 public class TablatureSound implements Sound {
 
