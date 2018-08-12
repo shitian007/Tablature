@@ -18,10 +18,13 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
     MainThread mGameThread;
     final CreateTabScrollView parentScrollView;
 
+    /**
+     * Handles long press on objects */
     public void setGestureDetector(GestureDetector gestureDetector) {
         this.gestureDetector = gestureDetector;
     }
     GestureDetector gestureDetector;
+    static boolean gestureHandlerActive;
 
     public void setCreateTabManager(CreateTabManager createTabManager) {
         this.createTabManager = createTabManager;
@@ -79,20 +82,20 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
     public boolean onTouchEvent(MotionEvent event) {
 
         gestureDetector.onTouchEvent(event);
+        if (gestureHandlerActive) {
+            parentScrollView.disableScrolling();
 
-        float xCoord = event.getX();
-        float yCoord = event.getY();
+            float xCoord = event.getX();
+            float yCoord = event.getY();
 
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                Log.d("CreateTabView onTouch", String.format("ACTION DOWN on coordinates: %f, %f", xCoord, yCoord));
-                break;
-            case MotionEvent.ACTION_MOVE:
-                Log.d("CreateTabView onTouch", "ACTION MOVE");
-                break;
-            case MotionEvent.ACTION_UP:
-                Log.d("CreateTabView onTouch", "ACTION UP");
-                break;
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_MOVE:
+                    Log.d("CreateTabView onTouch", "ACTION MOVE");
+                    break;
+                case MotionEvent.ACTION_UP:
+                    gestureHandlerActive = false;
+                    break;
+            }
         }
         return true;
     }

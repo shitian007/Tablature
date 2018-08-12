@@ -5,6 +5,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import com.tabs.tablature.framework.base.Note;
+import com.tabs.tablature.framework.base.SpriteBase;
 
 public class TabGestureListener extends GestureDetector.SimpleOnGestureListener {
 
@@ -16,6 +17,7 @@ public class TabGestureListener extends GestureDetector.SimpleOnGestureListener 
 
     @Override
     public void onLongPress(MotionEvent e) {
+        CreateTabView.gestureHandlerActive = true;
         Log.d("TabGestureListener", "Long press detected");
 
         float xCoord = e.getX();
@@ -23,9 +25,19 @@ public class TabGestureListener extends GestureDetector.SimpleOnGestureListener 
 
         for (Note note : createTabManager.getNotes()) {
             if (note.withinTouchBox(xCoord, yCoord)) {
-                Log.d("Note touched", "Positive");
+                createTabManager.setCurrentlySelectedObject(note);
+                note.setTransparency(150);
+                snapToCenter(note, xCoord, yCoord);
             }
 
         }
+    }
+
+    /**
+     * Snaps the sprite to the center of the clicked area
+     */
+    private void snapToCenter(SpriteBase spriteBase, float xCoord, float yCoord) {
+        spriteBase.x = xCoord - spriteBase.getWidth() / 2;
+        spriteBase.y = yCoord - spriteBase.getHeight() / 2;
     }
 }
