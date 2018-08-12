@@ -103,11 +103,11 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
             super.draw(canvas);
             canvas.drawColor(Color.WHITE);
             for (Stave stave : createTabManager.getStaves()) {
-                canvas.drawBitmap(stave.getImage(), stave.x, stave.y, null);
+                stave.draw(canvas);
             }
 
             for (Note note : createTabManager.getNotes()) {
-                canvas.drawBitmap(note.getImage(), note.x, note.y, null);
+                note.draw(canvas);
             }
         }
     }

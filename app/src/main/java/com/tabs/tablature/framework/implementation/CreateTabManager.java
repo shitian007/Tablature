@@ -19,13 +19,14 @@ public class CreateTabManager {
     ArrayList<Stave> staves;
     ArrayList<Note> notes;
 
-    public void instantiateObjects(TablatureFileIO tablatureFileIO) {
+    public void instantiateObjects() {
         staves = new ArrayList<>();
         notes = new ArrayList<>();
         try {
-            Bitmap crochet = BitmapFactory.decodeStream(tablatureFileIO.readAsset("Notes/Crotchets/" + "Crotchet.png"));
-            notes.add(new Note(crochet, 0, 0));
-            notes.add(new Note(crochet, 0, 300));
+            Stave stave = new Stave("Staves/Stave Large.png", 0, 0);
+            stave.setScale(0.5, 0.5);
+            staves.add(stave);
+            notes.add(new Note("Notes/Crotchets/Crotchet.png", 0, 0));
         } catch (Exception e) {
             e.printStackTrace();
         }

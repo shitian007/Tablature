@@ -12,6 +12,14 @@ public class SpriteBase {
 
     private Bitmap image;
 
+    public void setScale(double scaleX, double scaleY) {
+        this.image = Bitmap.createScaledBitmap(this.image,
+                (int)(scaleX * imageWidth),
+                (int)(scaleY * imageHeight), false);
+    }
+
+    private double scale;
+
     public float x;
     public float y;
 

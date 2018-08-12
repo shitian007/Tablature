@@ -7,8 +7,8 @@ import com.tabs.tablature.framework.base.SpriteBase;
 
 public class Note extends SpriteBase {
 
-    public Note(Bitmap bitmap, float initialX, float initialY) {
-        super(bitmap, initialX, initialY);
+    public Note(String assetPath, float initialX, float initialY) {
+        super(assetPath, initialX, initialY);
     }
 
     public boolean withinTouchBox(float xCoord, float yCoord) {

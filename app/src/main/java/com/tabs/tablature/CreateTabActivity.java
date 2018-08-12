@@ -48,7 +48,7 @@ public class CreateTabActivity extends Activity {
         createTabView = new CreateTabView(this, scrollView);
 
         createTabManager = new CreateTabManager();
-        createTabManager.instantiateObjects(tablatureFileIO);
+        createTabManager.instantiateObjects();
         createTabView.setCreateTabManager(createTabManager);
         createTabView.setGestureDetector(new GestureDetector(this, new TabGestureListener(createTabManager)));
 

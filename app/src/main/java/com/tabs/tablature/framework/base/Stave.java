@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 
 public class Stave extends SpriteBase {
 
-    public Stave(Bitmap bitmap, float initialX, float initialY) {
-        super(bitmap, initialX, initialY);
+    public Stave(String assetPath, float initialX, float initialY) {
+        super(assetPath, initialX, initialY);
     }
 }
