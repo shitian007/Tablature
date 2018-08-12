@@ -17,4 +17,12 @@ public class InteractiveSpriteBase extends SpriteBase {
         this.paint = new Paint();
         paint.setAlpha(transparency);
     }
+
+    /**
+     * Assumes sprite snaps to center of touch coordinates */
+    public void move(float xCoord, float yCoord) {
+        this.x = xCoord - getWidth() / 2;
+        this.y = yCoord - getHeight() / 2;
+    }
+
 }

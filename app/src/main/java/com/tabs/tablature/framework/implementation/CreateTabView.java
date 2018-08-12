@@ -90,10 +90,12 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
 
             switch (event.getAction()) {
                 case MotionEvent.ACTION_MOVE:
-                    Log.d("CreateTabView onTouch", "ACTION MOVE");
+                    createTabManager.getCurrentlySelectedObject().move(xCoord, yCoord);
                     break;
                 case MotionEvent.ACTION_UP:
                     gestureHandlerActive = false;
+                    parentScrollView.enableScrolling();
+                    createTabManager.resetCurrentlySelectedObject();
                     break;
             }
         }

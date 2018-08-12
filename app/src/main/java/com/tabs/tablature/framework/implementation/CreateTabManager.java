@@ -1,8 +1,8 @@
 package com.tabs.tablature.framework.implementation;
 
 import com.tabs.tablature.constants.DimenConstants;
+import com.tabs.tablature.framework.base.InteractiveSpriteBase;
 import com.tabs.tablature.framework.base.Note;
-import com.tabs.tablature.framework.base.SpriteBase;
 import com.tabs.tablature.framework.base.Stave;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class CreateTabManager {
     ArrayList<Stave> staves;
     ArrayList<Note> notes;
 
-    private SpriteBase currentlySelectedObject;
+    private InteractiveSpriteBase currentlySelectedObject;
 
     public void instantiateObjects() {
         staves = new ArrayList<>();
@@ -37,11 +37,18 @@ public class CreateTabManager {
         }
     }
 
-    public SpriteBase getCurrentlySelectedObject() {
+    public InteractiveSpriteBase getCurrentlySelectedObject() {
         return currentlySelectedObject;
     }
 
-    public void setCurrentlySelectedObject(SpriteBase currentlySelectedObject) {
+    public void setCurrentlySelectedObject(InteractiveSpriteBase currentlySelectedObject) {
         this.currentlySelectedObject = currentlySelectedObject;
+    }
+
+    /**
+     * Resets transparency of selected object and resets value */
+    public void resetCurrentlySelectedObject() {
+        this.currentlySelectedObject.setTransparency(255);
+        this.currentlySelectedObject = null;
     }
 }

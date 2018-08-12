@@ -27,17 +27,9 @@ public class TabGestureListener extends GestureDetector.SimpleOnGestureListener 
             if (note.withinTouchBox(xCoord, yCoord)) {
                 createTabManager.setCurrentlySelectedObject(note);
                 note.setTransparency(150);
-                snapToCenter(note, xCoord, yCoord);
+                note.move(xCoord, yCoord); // Snap sprite to center of click
             }
 
         }
-    }
-
-    /**
-     * Snaps the sprite to the center of the clicked area
-     */
-    private void snapToCenter(SpriteBase spriteBase, float xCoord, float yCoord) {
-        spriteBase.x = xCoord - spriteBase.getWidth() / 2;
-        spriteBase.y = yCoord - spriteBase.getHeight() / 2;
     }
 }
