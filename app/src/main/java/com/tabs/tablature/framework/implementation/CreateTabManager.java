@@ -24,7 +24,7 @@ public class CreateTabManager {
         notes = new ArrayList<>();
         try {
             Stave stave = new Stave("Staves/Stave Large.png", 0, 0);
-            stave.setScale(0.5, 0.5);
+            stave.setScale(0.6, 0.7);
             staves.add(stave);
             notes.add(new Note("Notes/Crotchets/Crotchet.png", 0, 0));
         } catch (Exception e) {

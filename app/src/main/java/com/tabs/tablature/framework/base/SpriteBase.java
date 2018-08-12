@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
 import com.tabs.tablature.CreateTabActivity;
+import com.tabs.tablature.constants.DimenConstants;
 
 import java.io.IOException;
 
@@ -47,6 +48,7 @@ public class SpriteBase {
     }
 
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(image, x, y, null);
+        canvas.drawBitmap(image, x + DimenConstants.SCROLL_VIEW_PADDING_LEFT,
+                y + DimenConstants.SCROLL_VIEW_PADDING_TOP, null);
     }
 }

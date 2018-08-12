@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.tabs.tablature.constants.DimenConstants;
 import com.tabs.tablature.framework.implementation.CreateTabManager;
 import com.tabs.tablature.framework.implementation.CreateTabScrollView;
 import com.tabs.tablature.framework.implementation.CreateTabView;
@@ -45,6 +46,7 @@ public class CreateTabActivity extends Activity {
         tablatureFileIO = new TablatureFileIO(this);
         tablatureAudio = new TablatureAudio(this);
         scrollView = new CreateTabScrollView(this);
+        scrollView.setVerticalScrollBarEnabled(false);
         createTabView = new CreateTabView(this, scrollView);
 
         createTabManager = new CreateTabManager();
