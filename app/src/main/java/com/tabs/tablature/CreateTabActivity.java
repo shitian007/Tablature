@@ -19,8 +19,8 @@ import com.tabs.tablature.framework.InputOutput.TablatureFileIO;
 
 public class CreateTabActivity extends Activity {
 
-    TablatureFileIO tablatureFileIO;
-    TablatureAudio tablatureAudio;
+    public static TablatureFileIO tablatureFileIO;
+    public static TablatureAudio tablatureAudio;
 
     CreateTabScrollView scrollView;
     CreateTabView createTabView;

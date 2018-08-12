@@ -1,7 +1,12 @@
 package com.tabs.tablature.framework.base;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+
+import com.tabs.tablature.CreateTabActivity;
+
+import java.io.IOException;
 
 public class SpriteBase {
 
@@ -13,12 +18,16 @@ public class SpriteBase {
     public float imageWidth;
     public float imageHeight;
 
-    public SpriteBase(Bitmap bitmap, float initialX, float initialY) {
-        this.image = bitmap;
+    public SpriteBase(String assetPath, float initialX, float initialY) {
+        try {
+            this.image = BitmapFactory.decodeStream(CreateTabActivity.tablatureFileIO.readAsset(assetPath));
+            this.imageWidth = image.getWidth();
+            this.imageHeight = image.getHeight();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.x = initialX;
         this.y = initialY;
-        this.imageWidth = bitmap.getWidth();
-        this.imageHeight = bitmap.getHeight();
     }
 
     public int getWidth() {
@@ -27,10 +36,6 @@ public class SpriteBase {
 
     public int getHeight() {
         return this.image.getHeight();
-    }
-
-    public Bitmap getImage() {
-        return this.image;
     }
 
     public void draw(Canvas canvas) {
