@@ -9,6 +9,7 @@ import android.view.GestureDetector;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import com.tabs.tablature.constants.DimenConstants;
 import com.tabs.tablature.framework.implementation.CreateTabManager;
@@ -39,7 +40,6 @@ public class CreateTabActivity extends Activity {
         wakeLock.acquire();
         hideSystemUI();
 
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -50,6 +50,7 @@ public class CreateTabActivity extends Activity {
         createTabView = new CreateTabView(this, scrollView);
 
         createTabManager = new CreateTabManager();
+        createTabManager.screenScale = getResources().getDisplayMetrics().density;
         createTabManager.instantiateObjects();
         createTabView.setCreateTabManager(createTabManager);
         createTabView.setGestureDetector(new GestureDetector(this, new TabGestureListener(createTabManager)));

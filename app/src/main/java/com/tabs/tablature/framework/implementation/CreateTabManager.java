@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class CreateTabManager {
 
+    public float screenScale;
 
     public ArrayList<Stave> getStaves() { return staves; }
     public ArrayList<Note> getNotes() {
@@ -24,11 +25,14 @@ public class CreateTabManager {
         staves = new ArrayList<>();
         notes = new ArrayList<>();
         try {
-            Stave stave = new Stave("Staves/Stave Large.png",
-                    DimenConstants.SCROLL_VIEW_PADDING_LEFT,
-                    DimenConstants.SCROLL_VIEW_PADDING_TOP);
-            stave.setScale(0.6, 0.7);
-            staves.add(stave);
+            for (int i = 0; i < 4; i++) {
+                Stave stave = new Stave("Staves/Stave Large.png",
+                        DimenConstants.SCROLL_VIEW_PADDING_LEFT,
+                        DimenConstants.SCROLL_VIEW_PADDING_TOP +
+                                i * DimenConstants.INTER_STAVE_DISTANCE);
+                stave.setScale(1.3, 0.7);
+                staves.add(stave);
+            }
             notes.add(new Note("Notes/Crotchets/Crotchet.png",
                     DimenConstants.SCROLL_VIEW_PADDING_LEFT,
                     DimenConstants.SCROLL_VIEW_PADDING_TOP));

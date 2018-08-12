@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.tabs.tablature.constants.DimenConstants;
 import com.tabs.tablature.framework.base.Note;
 import com.tabs.tablature.framework.base.Stave;
 
@@ -48,7 +49,8 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width = MeasureSpec.getSize(widthMeasureSpec);
-        int height = Math.max(MeasureSpec.getSize(heightMeasureSpec), 2000);
+        int height = Math.max(MeasureSpec.getSize(heightMeasureSpec),
+                createTabManager.getStaves().size() * 400);
         setMeasuredDimension(width, height);
     }
 
@@ -81,13 +83,19 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        gestureDetector.onTouchEvent(event);
-        if (gestureHandlerActive) {
+        float xCoord = event.getX();
+        float yCoord = event.getY();
+
+        /** TouchEvent on menu area */
+        if (yCoord > createTabManager.screenScale * 150) {
+            Log.d("Screen scale: ", String.valueOf(createTabManager.screenScale));
+            return true;
+        }
+
+        if (!gestureHandlerActive) {
+            gestureDetector.onTouchEvent(event);
+        } else {
             parentScrollView.disableScrolling();
-
-            float xCoord = event.getX();
-            float yCoord = event.getY();
-
             switch (event.getAction()) {
                 case MotionEvent.ACTION_MOVE:
                     createTabManager.getCurrentlySelectedObject().move(xCoord, yCoord);
@@ -110,7 +118,6 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
             for (Stave stave : createTabManager.getStaves()) {
                 stave.draw(canvas);
             }
-
             for (Note note : createTabManager.getNotes()) {
                 note.draw(canvas);
             }
