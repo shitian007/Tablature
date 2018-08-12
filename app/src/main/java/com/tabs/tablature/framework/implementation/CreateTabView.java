@@ -87,9 +87,11 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
         float yCoord = event.getY();
 
         /** TouchEvent on menu area */
-        if (yCoord > createTabManager.screenScale * 150) {
-            Log.d("Screen scale: ", String.valueOf(createTabManager.screenScale));
+        if (yCoord > createTabManager.screenScale * 300) {
+            parentScrollView.disableScrolling();
             return true;
+        } else {
+            parentScrollView.enableScrolling();
         }
 
         if (!gestureHandlerActive) {

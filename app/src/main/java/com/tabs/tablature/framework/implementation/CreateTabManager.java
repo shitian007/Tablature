@@ -30,7 +30,7 @@ public class CreateTabManager {
                         DimenConstants.SCROLL_VIEW_PADDING_LEFT,
                         DimenConstants.SCROLL_VIEW_PADDING_TOP +
                                 i * DimenConstants.INTER_STAVE_DISTANCE);
-                stave.setScale(1.3, 0.7);
+                stave.setScale(1.3, 0.5);
                 staves.add(stave);
             }
             notes.add(new Note("Notes/Crotchets/Crotchet.png",
