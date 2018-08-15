@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/create_tab_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreateTabActivity">
 
-</FrameLayout>
+    <com.tabs.tablature.framework.implementation.CreateTabScrollView
+        android:id="@+id/create_tab_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"/>
+
+    <Button
+        android:layout_below="@id/create_tab_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button"/>
+
+</RelativeLayout>

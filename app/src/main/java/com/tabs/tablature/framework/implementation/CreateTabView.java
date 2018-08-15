@@ -8,10 +8,12 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.ScrollView;
 
-import com.tabs.tablature.constants.DimenConstants;
 import com.tabs.tablature.framework.base.Note;
 import com.tabs.tablature.framework.base.Stave;
+
+import static com.tabs.tablature.constants.DimenConstants.CREATE_TAB_MENU_HEIGHT;
 
 
 public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback {
@@ -50,7 +52,7 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = Math.max(MeasureSpec.getSize(heightMeasureSpec),
-                createTabManager.getStaves().size() * 400);
+                createTabManager.getStaves().size() * 300);
         setMeasuredDimension(width, height);
     }
 
@@ -81,38 +83,6 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-
-        float xCoord = event.getX();
-        float yCoord = event.getY();
-
-        /** TouchEvent on menu area */
-        if (yCoord > createTabManager.screenScale * 300) {
-            parentScrollView.disableScrolling();
-            return true;
-        } else {
-            parentScrollView.enableScrolling();
-        }
-
-        if (!gestureHandlerActive) {
-            gestureDetector.onTouchEvent(event);
-        } else {
-            parentScrollView.disableScrolling();
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_MOVE:
-                    createTabManager.getCurrentlySelectedObject().move(xCoord, yCoord);
-                    break;
-                case MotionEvent.ACTION_UP:
-                    gestureHandlerActive = false;
-                    parentScrollView.enableScrolling();
-                    createTabManager.resetCurrentlySelectedObject();
-                    break;
-            }
-        }
-        return true;
-    }
-
-    @Override
     public void draw(Canvas canvas) {
         if (canvas != null) {
             super.draw(canvas);
@@ -124,5 +94,33 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
                 note.draw(canvas);
             }
         }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        Log.d("onTouchEvent", "xCoord: " + event.getX() + " yCoord: " + event.getY());
+
+        if (!gestureHandlerActive) {
+            parentScrollView.enableScrolling();
+            gestureDetector.onTouchEvent(event);
+        } else {
+            parentScrollView.disableScrolling();
+            standardTouchHandler(event);
+        }
+        return true;
+    }
+
+    private boolean standardTouchHandler(MotionEvent event) {
+
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_MOVE:
+                createTabManager.getCurrentlySelectedObject().move(event.getX(), event.getY());
+                break;
+            case MotionEvent.ACTION_UP:
+                gestureHandlerActive = false;
+                createTabManager.resetCurrentlySelectedObject();
+                break;
+        }
+        return true;
     }
 }

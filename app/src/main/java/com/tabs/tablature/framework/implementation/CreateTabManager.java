@@ -1,11 +1,14 @@
 package com.tabs.tablature.framework.implementation;
 
-import com.tabs.tablature.constants.DimenConstants;
 import com.tabs.tablature.framework.base.InteractiveSpriteBase;
 import com.tabs.tablature.framework.base.Note;
 import com.tabs.tablature.framework.base.Stave;
 
 import java.util.ArrayList;
+
+import static com.tabs.tablature.constants.DimenConstants.INTER_STAVE_DISTANCE;
+import static com.tabs.tablature.constants.DimenConstants.SCROLL_VIEW_PADDING_LEFT;
+import static com.tabs.tablature.constants.DimenConstants.SCROLL_VIEW_PADDING_TOP;
 
 public class CreateTabManager {
 
@@ -27,15 +30,15 @@ public class CreateTabManager {
         try {
             for (int i = 0; i < 4; i++) {
                 Stave stave = new Stave("Staves/Stave Large.png",
-                        DimenConstants.SCROLL_VIEW_PADDING_LEFT,
-                        DimenConstants.SCROLL_VIEW_PADDING_TOP +
-                                i * DimenConstants.INTER_STAVE_DISTANCE);
-                stave.setScale(1.3, 0.5);
+                        SCROLL_VIEW_PADDING_LEFT * screenScale,
+                        SCROLL_VIEW_PADDING_TOP * screenScale + i * INTER_STAVE_DISTANCE * screenScale);
+
+                stave.setScale(0.5 * screenScale, 0.18 * screenScale);
                 staves.add(stave);
             }
             notes.add(new Note("Notes/Crotchets/Crotchet.png",
-                    DimenConstants.SCROLL_VIEW_PADDING_LEFT,
-                    DimenConstants.SCROLL_VIEW_PADDING_TOP));
+                    SCROLL_VIEW_PADDING_LEFT * screenScale,
+                    SCROLL_VIEW_PADDING_TOP * screenScale));
         } catch (Exception e) {
             e.printStackTrace();
         }

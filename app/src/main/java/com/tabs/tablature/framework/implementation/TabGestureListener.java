@@ -17,7 +17,6 @@ public class TabGestureListener extends GestureDetector.SimpleOnGestureListener 
 
     @Override
     public void onLongPress(MotionEvent e) {
-        CreateTabView.gestureHandlerActive = true;
         Log.d("TabGestureListener", "Long press detected");
 
         float xCoord = e.getX();
@@ -30,6 +29,9 @@ public class TabGestureListener extends GestureDetector.SimpleOnGestureListener 
                 note.move(xCoord, yCoord); // Snap sprite to center of click
             }
 
+        }
+        if (createTabManager.getCurrentlySelectedObject() != null) {
+            CreateTabView.gestureHandlerActive = true;
         }
     }
 }

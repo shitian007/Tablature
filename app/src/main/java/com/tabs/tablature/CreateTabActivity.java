@@ -9,9 +9,7 @@ import android.view.GestureDetector;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 
-import com.tabs.tablature.constants.DimenConstants;
 import com.tabs.tablature.framework.implementation.CreateTabManager;
 import com.tabs.tablature.framework.implementation.CreateTabScrollView;
 import com.tabs.tablature.framework.implementation.CreateTabView;
@@ -45,18 +43,19 @@ public class CreateTabActivity extends Activity {
 
         tablatureFileIO = new TablatureFileIO(this);
         tablatureAudio = new TablatureAudio(this);
-        scrollView = new CreateTabScrollView(this);
+
+        setContentView(R.layout.activity_create_tab);
+        scrollView = findViewById(R.id.create_tab_scroll_view);
         scrollView.setVerticalScrollBarEnabled(false);
-        createTabView = new CreateTabView(this, scrollView);
 
         createTabManager = new CreateTabManager();
         createTabManager.screenScale = getResources().getDisplayMetrics().density;
         createTabManager.instantiateObjects();
+        createTabView = new CreateTabView(this, scrollView);
         createTabView.setCreateTabManager(createTabManager);
         createTabView.setGestureDetector(new GestureDetector(this, new TabGestureListener(createTabManager)));
 
         scrollView.addView(createTabView);
-        setContentView(scrollView);
     }
 
     // Enable stick immersive display on full screen
