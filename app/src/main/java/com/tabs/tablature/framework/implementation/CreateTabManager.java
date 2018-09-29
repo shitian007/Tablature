@@ -12,9 +12,13 @@ import static com.tabs.tablature.constants.DimenConstants.SCROLL_VIEW_PADDING_TO
 
 public class CreateTabManager {
 
+    private CreateTabView createTabView;
     public float screenScale;
 
-    public ArrayList<Stave> getStaves() { return staves; }
+    public ArrayList<Stave> getStaves() {
+        return staves;
+    }
+
     public ArrayList<Note> getNotes() {
         return notes;
     }
@@ -24,18 +28,20 @@ public class CreateTabManager {
 
     private InteractiveSpriteBase currentlySelectedObject;
 
+    public CreateTabManager(CreateTabView createTabView) {
+        this.createTabView = createTabView;
+    }
+
     public void instantiateObjects() {
         staves = new ArrayList<>();
         notes = new ArrayList<>();
         try {
-            for (int i = 0; i < 4; i++) {
-                Stave stave = new Stave("Staves/Stave Large.png",
-                        SCROLL_VIEW_PADDING_LEFT * screenScale,
-                        SCROLL_VIEW_PADDING_TOP * screenScale + i * INTER_STAVE_DISTANCE * screenScale);
+            Stave stave = new Stave("Staves/Stave Large.png",
+                    SCROLL_VIEW_PADDING_LEFT * screenScale,
+                    SCROLL_VIEW_PADDING_TOP * screenScale);
 
-                stave.setScale(0.5 * screenScale, 0.18 * screenScale);
-                staves.add(stave);
-            }
+            stave.setScale(0.5 * screenScale, 0.18 * screenScale);
+            staves.add(stave);
             notes.add(new Note("Notes/Crotchets/Crotchet.png",
                     SCROLL_VIEW_PADDING_LEFT * screenScale,
                     SCROLL_VIEW_PADDING_TOP * screenScale));
@@ -53,9 +59,21 @@ public class CreateTabManager {
     }
 
     /**
-     * Resets transparency of selected object and resets value */
+     * Resets transparency of selected object and resets value
+     */
     public void resetCurrentlySelectedObject() {
         this.currentlySelectedObject.setTransparency(255);
         this.currentlySelectedObject = null;
     }
+
+    public void addStave() {
+        MainThread.canvas = createTabView.getHolder().lockCanvas();
+        createTabView.getHolder().unlockCanvasAndPost(MainThread.canvas);
+        Stave newStave = new Stave("Staves/Stave Large.png", SCROLL_VIEW_PADDING_LEFT * screenScale,
+                SCROLL_VIEW_PADDING_TOP * screenScale + this.staves.size() * INTER_STAVE_DISTANCE * screenScale);
+        newStave.setScale(0.5 * screenScale, 0.18 * screenScale);
+        this.staves.add(newStave);
+        createTabView.requestLayout();
+    }
+
 }

@@ -52,7 +52,7 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = Math.max(MeasureSpec.getSize(heightMeasureSpec),
-                createTabManager.getStaves().size() * 300);
+                createTabManager.getStaves().size() * 230);
         setMeasuredDimension(width, height);
     }
 
@@ -101,6 +101,7 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
         Log.d("onTouchEvent", "xCoord: " + event.getX() + " yCoord: " + event.getY());
 
         if (!gestureHandlerActive) {
+            Log.d("GestureHandler Inactive", "xCoord: " + event.getX() + " yCoord: " + event.getY());
             parentScrollView.enableScrolling();
             gestureDetector.onTouchEvent(event);
         } else {
@@ -114,9 +115,11 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_MOVE:
+                Log.d("StandardTouch MOVE", "xCoord: " + event.getX() + " yCoord: " + event.getY());
                 createTabManager.getCurrentlySelectedObject().move(event.getX(), event.getY());
                 break;
             case MotionEvent.ACTION_UP:
+                Log.d("StandardTouch UP", "xCoord: " + event.getX() + " yCoord: " + event.getY());
                 gestureHandlerActive = false;
                 createTabManager.resetCurrentlySelectedObject();
                 break;

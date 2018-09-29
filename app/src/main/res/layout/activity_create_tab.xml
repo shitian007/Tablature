@@ -9,12 +9,18 @@
     <com.tabs.tablature.framework.implementation.CreateTabScrollView
         android:id="@+id/create_tab_scroll_view"
         android:layout_width="match_parent"
+        android:scrollbars="none"
         android:layout_height="300dp"/>
 
-    <Button
+    <RelativeLayout
         android:layout_below="@id/create_tab_scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button"/>
+        android:layout_height="80dp">
+        <Button
+            android:id="@+id/add_stave_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button"/>
+    </RelativeLayout>
 
 </RelativeLayout>

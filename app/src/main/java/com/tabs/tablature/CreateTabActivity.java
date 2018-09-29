@@ -3,19 +3,25 @@ package com.tabs.tablature;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import com.tabs.tablature.framework.implementation.CreateTabManager;
 import com.tabs.tablature.framework.implementation.CreateTabScrollView;
 import com.tabs.tablature.framework.implementation.CreateTabView;
+import com.tabs.tablature.framework.implementation.MainThread;
 import com.tabs.tablature.framework.implementation.TabGestureListener;
 import com.tabs.tablature.framework.InputOutput.TablatureAudio;
 import com.tabs.tablature.framework.InputOutput.TablatureFileIO;
+
+import static android.view.View.MeasureSpec.EXACTLY;
 
 public class CreateTabActivity extends Activity {
 
@@ -25,6 +31,9 @@ public class CreateTabActivity extends Activity {
     CreateTabScrollView scrollView;
     CreateTabView createTabView;
     CreateTabManager createTabManager;
+
+    Button addStaveButton;
+    View.OnClickListener addStaveListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,17 +54,31 @@ public class CreateTabActivity extends Activity {
         tablatureAudio = new TablatureAudio(this);
 
         setContentView(R.layout.activity_create_tab);
-        scrollView = findViewById(R.id.create_tab_scroll_view);
-        scrollView.setVerticalScrollBarEnabled(false);
 
-        createTabManager = new CreateTabManager();
+        scrollView = findViewById(R.id.create_tab_scroll_view);
+        createTabView = new CreateTabView(this, scrollView);
+        createTabManager = new CreateTabManager(createTabView);
         createTabManager.screenScale = getResources().getDisplayMetrics().density;
         createTabManager.instantiateObjects();
-        createTabView = new CreateTabView(this, scrollView);
         createTabView.setCreateTabManager(createTabManager);
         createTabView.setGestureDetector(new GestureDetector(this, new TabGestureListener(createTabManager)));
-
         scrollView.addView(createTabView);
+
+        initializeListeners();
+        addStaveButton = findViewById(R.id.add_stave_button);
+        addStaveButton.setOnClickListener(addStaveListener);
+    }
+
+    /** Initialize listeners for menu buttons */
+    private void initializeListeners() {
+
+        addStaveListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createTabManager.addStave();
+            }
+        };
+
     }
 
     // Enable stick immersive display on full screen
