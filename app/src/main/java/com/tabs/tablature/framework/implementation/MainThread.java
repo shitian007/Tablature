@@ -26,7 +26,11 @@ public class MainThread extends Thread {
     @Override
     public void run() {
         while (running) {
-            canvas = this.surfaceHolder.lockCanvas();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                canvas = this.surfaceHolder.lockHardwareCanvas();
+            } else {
+                canvas = this.surfaceHolder.lockCanvas();
+            }
             synchronized (surfaceHolder) {
                 this.createTabView.draw(canvas);
             }
