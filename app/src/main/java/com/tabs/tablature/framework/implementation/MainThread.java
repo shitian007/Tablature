@@ -1,7 +1,11 @@
 package com.tabs.tablature.framework.implementation;
 
 import android.graphics.Canvas;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.view.SurfaceHolder;
+
+import java.util.concurrent.TimeUnit;
 
 public class MainThread extends Thread {
 
@@ -22,7 +26,6 @@ public class MainThread extends Thread {
     @Override
     public void run() {
         while (running) {
-            canvas = null;
             canvas = this.surfaceHolder.lockCanvas();
             synchronized (surfaceHolder) {
                 this.createTabView.draw(canvas);
@@ -34,5 +37,4 @@ public class MainThread extends Thread {
     public void setRunning(boolean running) {
         this.running = running;
     }
-
 }

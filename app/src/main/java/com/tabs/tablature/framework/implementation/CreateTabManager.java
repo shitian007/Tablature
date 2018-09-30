@@ -15,14 +15,6 @@ public class CreateTabManager {
     private CreateTabView createTabView;
     public float screenScale;
 
-    public ArrayList<Stave> getStaves() {
-        return staves;
-    }
-
-    public ArrayList<Note> getNotes() {
-        return notes;
-    }
-
     ArrayList<Stave> staves;
     ArrayList<Note> notes;
 
@@ -67,12 +59,17 @@ public class CreateTabManager {
     }
 
     public void addStave() {
-        MainThread.canvas = createTabView.getHolder().lockCanvas();
-        createTabView.getHolder().unlockCanvasAndPost(MainThread.canvas);
         Stave newStave = new Stave("Staves/Stave Large.png", SCROLL_VIEW_PADDING_LEFT * screenScale,
                 SCROLL_VIEW_PADDING_TOP * screenScale + this.staves.size() * INTER_STAVE_DISTANCE * screenScale);
         newStave.setScale(0.5 * screenScale, 0.18 * screenScale);
-        this.staves.add(newStave);
+        synchronized (this.staves) {
+            this.staves.add(newStave);
+        }
+    }
+
+    /** Deletes stave at index i */
+    public void deleteStave(int i) {
+        this.staves.remove(i);
         createTabView.requestLayout();
     }
 

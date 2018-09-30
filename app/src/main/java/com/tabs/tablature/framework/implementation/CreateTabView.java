@@ -8,30 +8,29 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.widget.ScrollView;
 
 import com.tabs.tablature.framework.base.Note;
 import com.tabs.tablature.framework.base.Stave;
 
-import static com.tabs.tablature.constants.DimenConstants.CREATE_TAB_MENU_HEIGHT;
-
-
 public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback {
 
-    MainThread mGameThread;
+    static MainThread mGameThread;
     final CreateTabScrollView parentScrollView;
 
     /**
-     * Handles long press on objects */
+     * Handles long press on objects
+     */
     public void setGestureDetector(GestureDetector gestureDetector) {
         this.gestureDetector = gestureDetector;
     }
+
     GestureDetector gestureDetector;
     static boolean gestureHandlerActive;
 
     public void setCreateTabManager(CreateTabManager createTabManager) {
         this.createTabManager = createTabManager;
     }
+
     CreateTabManager createTabManager;
 
     public CreateTabView(Context context, CreateTabScrollView parentScrollView) {
@@ -52,7 +51,7 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = Math.max(MeasureSpec.getSize(heightMeasureSpec),
-                createTabManager.getStaves().size() * 230);
+                createTabManager.staves.size() * 230);
         setMeasuredDimension(width, height);
     }
 
@@ -87,10 +86,12 @@ public class CreateTabView extends SurfaceView implements SurfaceHolder.Callback
         if (canvas != null) {
             super.draw(canvas);
             canvas.drawColor(Color.WHITE);
-            for (Stave stave : createTabManager.getStaves()) {
-                stave.draw(canvas);
+            synchronized (createTabManager.staves) {
+                for (Stave stave : createTabManager.staves) {
+                    stave.draw(canvas);
+                }
             }
-            for (Note note : createTabManager.getNotes()) {
+            for (Note note : createTabManager.notes) {
                 note.draw(canvas);
             }
         }

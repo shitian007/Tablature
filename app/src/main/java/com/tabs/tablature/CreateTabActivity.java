@@ -3,10 +3,8 @@ package com.tabs.tablature;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
-import android.graphics.Canvas;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.View;
 import android.view.Window;
@@ -16,21 +14,18 @@ import android.widget.Button;
 import com.tabs.tablature.framework.implementation.CreateTabManager;
 import com.tabs.tablature.framework.implementation.CreateTabScrollView;
 import com.tabs.tablature.framework.implementation.CreateTabView;
-import com.tabs.tablature.framework.implementation.MainThread;
 import com.tabs.tablature.framework.implementation.TabGestureListener;
 import com.tabs.tablature.framework.InputOutput.TablatureAudio;
 import com.tabs.tablature.framework.InputOutput.TablatureFileIO;
-
-import static android.view.View.MeasureSpec.EXACTLY;
 
 public class CreateTabActivity extends Activity {
 
     public static TablatureFileIO tablatureFileIO;
     public static TablatureAudio tablatureAudio;
 
-    CreateTabScrollView scrollView;
-    CreateTabView createTabView;
-    CreateTabManager createTabManager;
+    static CreateTabScrollView scrollView;
+    static CreateTabView createTabView;
+    static CreateTabManager createTabManager;
 
     Button addStaveButton;
     View.OnClickListener addStaveListener;
@@ -69,13 +64,16 @@ public class CreateTabActivity extends Activity {
         addStaveButton.setOnClickListener(addStaveListener);
     }
 
-    /** Initialize listeners for menu buttons */
+    /**
+     * Initialize listeners for menu buttons
+     */
     private void initializeListeners() {
 
         addStaveListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 createTabManager.addStave();
+                createTabView.requestLayout();
             }
         };
 

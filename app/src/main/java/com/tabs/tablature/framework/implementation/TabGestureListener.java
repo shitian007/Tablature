@@ -22,7 +22,7 @@ public class TabGestureListener extends GestureDetector.SimpleOnGestureListener 
         float xCoord = e.getX();
         float yCoord = e.getY();
 
-        for (Note note : createTabManager.getNotes()) {
+        for (Note note : createTabManager.notes) {
             if (note.withinTouchBox(xCoord, yCoord)) {
                 createTabManager.setCurrentlySelectedObject(note);
                 note.setTransparency(150);
